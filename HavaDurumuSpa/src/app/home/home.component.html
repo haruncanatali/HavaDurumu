@@ -1,0 +1,30 @@
+<app-nav></app-nav>
+<div class="row h-100" id="mainPageRow">
+    <h2 class="display-2 text-center mb-4 font-italic">
+        <span style="font-style: italic; font-weight: 400;">Şehrinizi Seçin</span>
+    </h2>
+    <div class="mb-3 d-flex justify-content-center mt-3">
+        <select (ngModelChange)="onSelectChange($event)" name="secilisehir" class="" style="width: 300px;" [(ngModel)]="this.seciliSehir">
+          <option [value]=""></option>  
+          <option *ngFor="let sehir of this.sehirler" [value]="sehir.ad">{{sehir.ad}}</option>
+        </select>
+    </div>
+
+    <div *ngIf="this.seciliSehir.length>1" class="row d-flex justify-content-center" style="height: 320px; background-color: #599AD2;">
+        <div *ngIf="this.response_.city == null" class="alert alert-danger" role="alert">
+            Veriler çekilirken hata meydana geldi. Lütfen daha sonra tekrar deneyiniz.
+          </div>
+        <div class="col-md-11 d-flex justify-content-center">
+            <div *ngFor="let item of this.response_.result" class="mt-3  border border-dark border-4" style="margin-left: 8px; float:left; width: 160px; height: 300px; background-color: #599AD2;">
+                <div class="row d-flex justify-content-center">
+                    <img src="{{item.icon}}" class="mt-2" style="width: 100px; height: 100px;">
+                </div>
+                <h5 class="text-center">{{item.degree}} &#8451;</h5>
+                <p class="text-center mt-2">{{item.date}}</p>
+                <p class="text-center">{{item.day}}</p>
+                <h3 class="text-center">{{item.status}}</h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
